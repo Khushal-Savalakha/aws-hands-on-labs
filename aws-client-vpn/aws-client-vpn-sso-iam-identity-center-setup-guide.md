@@ -51,28 +51,8 @@ This lab covers the parts most guides skip: why you need **two SAML apps**, **tw
 
 Clicking **Connect** looks like one step. It's seven, and three of them never touch your browser.
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant C as AWS VPN Client
-    participant B as Browser
-    participant IC as IAM Identity Center
-    participant E as Client VPN endpoint
-    participant P as IAM SAML provider
+![AWS Client VPN login flow: 7 steps between the VPN Client, browser, IAM Identity Center and Client VPN endpoint](https://github.com/user-attachments/assets/2258c53b-4b8b-49bc-b6b2-5bf5eb0c4158)
 
-    C->>E: I want to connect (checks server certificate)
-    E->>P: Get sign-in URL
-    E-->>C: Login request, open this URL
-    C->>B: Open sign-in URL
-    B->>IC: SAMLRequest
-    IC-->>B: Password + MFA
-    B->>IC: Portal session, login finished
-    IC-->>B: Signed SAML response
-    B->>C: POST to http://127.0.0.1:35001
-    C->>E: Here is the signed response
-    E->>P: Verify signature with signing certificate
-    E-->>C: Connected
-```
 
 | # | Who talks to whom | Where you see it |
 |:-:|---|---|
